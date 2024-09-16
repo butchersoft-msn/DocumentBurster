@@ -719,7 +719,6 @@ namespace DocumentSplitter
                 return; // No styles part, exit
             }
 
-
             var styles = styleDefinitionsPart.Styles.Elements<Style>();
 
             // Prepare the CSS output
@@ -761,7 +760,6 @@ namespace DocumentSplitter
                     var alignment = paragraphProperties.Justification?.Val.ToString().ToLower();
                     if (alignment != null)
                     {
-
                         string textAlign = alignment switch
                         {
                             "center" => "center",
@@ -777,7 +775,6 @@ namespace DocumentSplitter
                     var spacing = paragraphProperties.SpacingBetweenLines;
                     if (spacing != null)
                     {
-
                         //TODO 
                         if (spacing.Before != null)
                         {
@@ -791,7 +788,9 @@ namespace DocumentSplitter
                 }
 
                 // Extract run properties (e.g., font, bold, italic)
-                string oldfontSize = "22";
+                string defaultFontSize = "22";
+                string defaultFontColor = "#000000";
+
                 var runProperties = style.StyleRunProperties;
                 if (runProperties != null)
                 {
@@ -806,21 +805,19 @@ namespace DocumentSplitter
                     }
 
                     // Handle font size
-                    
+                    var fontSize = defaultFontSize;
                     if (runProperties.FontSize != null)
                     {
-                        var fontSize = runProperties.FontSize.Val.Value == null ? oldfontSize : runProperties.FontSize.Val.Value;
-                        cssBuilder.AppendLine($"  font-size: {int.Parse(fontSize) / 2}px;"); // Word font size is in half-points
-                        oldfontSize = fontSize;
-                    }
+                        fontSize = runProperties.FontSize.Val.Value == null ? defaultFontSize : runProperties.FontSize.Val.Value;
+                    }                        
+                    cssBuilder.AppendLine($"  font-size: {int.Parse(fontSize) / 2}px;"); // Word font size is in half-points
 
-                    // Handle font color
-                    if (runProperties.Color != null && runProperties.Color.Val.ToString() !="auto")
-                    {                        
-                        cssBuilder.AppendLine($"  color: #{runProperties.Color.Val};");
-                    }
-
-                    
+                    var fontColor = defaultFontColor;
+                    if (runProperties.Color != null)
+                    {
+                        fontColor = runProperties.Color.Val.Value == null ? defaultFontColor : runProperties.Color.Val.Value;
+                    }                    
+                    cssBuilder.AppendLine($"  color: #{fontColor};");
 
                     // Handle font family
                     if (runProperties.RunFonts != null)
@@ -845,6 +842,3 @@ namespace DocumentSplitter
         }
     }
 }
-
-
-
