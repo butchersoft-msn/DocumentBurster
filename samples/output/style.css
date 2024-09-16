@@ -1,0 +1,863 @@
+.btn {  background-color: DodgerBlue;border: none;color: white;padding: 12px 30px;cursor: pointer;font-size: 14px;}
+.btn:hover { background-color: RoyalBlue;}
+a, a:visited, a:hover, a:active { color: inherit; }
+.Normal {
+  font-size: 10px;
+}
+.Heading1 {
+  font-size: 20px;
+  color: #0F4761;
+ font-family: "sans-serif","Arial";
+}
+.Heading2 {
+  font-size: 16px;
+  color: #0F4761;
+ font-family: "sans-serif","Arial";
+}
+.Heading3 {
+  font-size: 14px;
+  color: #0F4761;
+ font-family: "sans-serif","Arial";
+}
+.Heading4 {
+  font-style: italic;
+  color: #0F4761;
+ font-family: "sans-serif","Arial";
+}
+.Heading5 {
+  color: #0F4761;
+ font-family: "sans-serif","Arial";
+}
+.Heading6 {
+  font-style: italic;
+  color: #595959;
+ font-family: "sans-serif","Arial";
+}
+.Heading7 {
+  color: #595959;
+ font-family: "sans-serif","Arial";
+}
+.Heading8 {
+  font-style: italic;
+  color: #272727;
+ font-family: "sans-serif","Arial";
+}
+.Heading9 {
+  color: #272727;
+ font-family: "sans-serif","Arial";
+}
+.DefaultParagraphFont {
+}
+.TableNormal {
+}
+.NoList {
+}
+.Heading1Char {
+  font-size: 20px;
+  color: #0F4761;
+ font-family: "sans-serif","Arial";
+}
+.Heading2Char {
+  font-size: 16px;
+  color: #0F4761;
+ font-family: "sans-serif","Arial";
+}
+.Heading3Char {
+  font-size: 14px;
+  color: #0F4761;
+ font-family: "sans-serif","Arial";
+}
+.Heading4Char {
+  font-style: italic;
+  color: #0F4761;
+ font-family: "sans-serif","Arial";
+}
+.Heading5Char {
+  color: #0F4761;
+ font-family: "sans-serif","Arial";
+}
+.Heading6Char {
+  font-style: italic;
+  color: #595959;
+ font-family: "sans-serif","Arial";
+}
+.Heading7Char {
+  color: #595959;
+ font-family: "sans-serif","Arial";
+}
+.Heading8Char {
+  font-style: italic;
+  color: #272727;
+ font-family: "sans-serif","Arial";
+}
+.Heading9Char {
+  color: #272727;
+ font-family: "sans-serif","Arial";
+}
+.Title {
+  font-size: 28px;
+ font-family: "sans-serif","Arial";
+}
+.TitleChar {
+  font-size: 28px;
+ font-family: "sans-serif","Arial";
+}
+.Subtitle {
+  font-size: 14px;
+  color: #595959;
+ font-family: "sans-serif","Arial";
+}
+.SubtitleChar {
+  font-size: 14px;
+  color: #595959;
+ font-family: "sans-serif","Arial";
+}
+.Quote {
+  text-align: center;
+  font-style: italic;
+  color: #404040;
+}
+.QuoteChar {
+  font-style: italic;
+  color: #404040;
+}
+.ListParagraph {
+}
+.IntenseEmphasis {
+  font-style: italic;
+  color: #0F4761;
+}
+.IntenseQuote {
+  text-align: center;
+  font-style: italic;
+  color: #0F4761;
+}
+.IntenseQuoteChar {
+  font-style: italic;
+  color: #0F4761;
+}
+.IntenseReference {
+  font-weight: bold;
+  color: #0F4761;
+}
+.ProductList-Body {
+  font-size: 9px;
+}
+.ProductList-BodySpaced {
+  font-size: 9px;
+}
+.ProductList-BodyIndented {
+  font-size: 9px;
+}
+.ProductList-BodyIndented2 {
+  font-size: 9px;
+}
+.ProductList-TableBody {
+  font-size: 8px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-BodyChar {
+  font-size: 8px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-BodyIndentedChar {
+  font-size: 9px;
+}
+.ProductList-Bullet {
+  font-size: 9px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-BulletChar {
+  font-size: 9px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-SectionHeading {
+  font-weight: bold;
+  font-size: 20px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-SectionHeadingChar {
+  font-weight: bold;
+  font-size: 20px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-OfferingGroupHeading {
+  font-weight: bold;
+  font-size: 14px;
+  color: #00188F;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-OfferingGroupHeadingChar {
+  font-weight: bold;
+  font-size: 14px;
+  color: #00188F;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-Offering1 {
+  font-size: 8px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-Offering1Char {
+  font-size: 8px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-OfferingBody {
+  font-size: 8px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-OfferingBodyChar {
+  font-size: 8px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-Offering1Heading {
+  font-weight: bold;
+  font-size: 14px;
+  color: #00188F;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-Offering1HeadingChar {
+  font-weight: bold;
+  font-size: 14px;
+  color: #00188F;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-Offering1HeadingNoBorder {
+  font-weight: bold;
+  font-size: 14px;
+  color: #00188F;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-SubSection1Heading {
+  font-weight: bold;
+  font-size: 14px;
+  color: #00188F;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-SubSection1HeadingChar {
+  font-weight: bold;
+  font-size: 14px;
+  color: #00188F;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-Offering2Heading {
+  color: #0072C6;
+}
+.ProductList-Offering2HeadingChar {
+  font-weight: bold;
+  font-size: 14px;
+  color: #0072C6;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-Offering2HeadingNoBorder {
+  color: #0072C6;
+}
+.ProductList-Offering2 {
+}
+.ProductList-Offering2Char {
+  font-size: 8px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-SubSubSectionHeading {
+  font-weight: bold;
+  color: #00188F;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-SubSubSectionHeadingChar {
+  font-weight: bold;
+  font-size: 9px;
+  color: #00188F;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-SubSection2Heading {
+  color: #0072C6;
+}
+.ProductList-SubSection2HeadingChar {
+  font-weight: bold;
+  font-size: 14px;
+  color: #0072C6;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-OfferingHeading {
+  font-weight: bold;
+  font-size: 14px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-OfferingHeadingChar {
+  font-weight: bold;
+  font-size: 14px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-Offering1SubSection {
+  font-size: 12px;
+}
+.ProductList-Offering {
+  font-size: 8px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-OfferingChar {
+  font-size: 8px;
+ font-family: "Calibri Light","Arial";
+}
+.ProductList-ClauseHeading {
+  font-weight: bold;
+  color: #00188F;
+}
+.ProductList-SubClauseHeading {
+  font-weight: bold;
+  color: #0072C6;
+}
+.ProductList-SubSubClauseHeading {
+  font-weight: bold;
+  color: #4668C5;
+}
+.PURBody {
+  font-size: 9px;
+}
+.PURHeading3 {
+  font-weight: bold;
+  font-size: 14px;
+  color: #00188F;
+}
+.PURHeading1 {
+  font-weight: bold;
+  font-size: 14px;
+  color: #00188F;
+ font-family: "Calibri Light","Arial";
+}
+.PURHeading2 {
+  font-weight: bold;
+}
+.PURLicenseTerm {
+  font-size: 6px;
+ font-family: "Arial","Arial";
+}
+.PURGraphic {
+  font-size: 10px;
+  color: #E8E8E8;
+ font-family: "Arial","Arial";
+}
+.BalloonText {
+  font-size: 8px;
+ font-family: "Tahoma","Arial";
+}
+.BalloonTextChar {
+  font-size: 8px;
+ font-family: "Tahoma","Arial";
+}
+.PURHeading4 {
+  font-size: 10px;
+}
+.Header {
+}
+.HeaderChar {
+  font-size: 10px;
+}
+.PURBlueStrong {
+  font-size: 9px;
+  color: #0E2841;
+ font-family: "Arial","Arial";
+}
+.PURPageNumber {
+  font-weight: bold;
+  font-size: 10px;
+  color: #0E2841;
+ font-family: "Arial","Arial";
+}
+.PURBullet {
+}
+.TableGrid {
+  font-size: 10px;
+  color: #E8E8E8;
+ font-family: "Arial","Arial";
+}
+.PURTableText {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 9px;
+ font-family: "Arial","Arial";
+}
+.PURTableHeaderGrey {
+  font-weight: bold;
+  font-size: 9px;
+  color: #000000;
+ font-family: "Arial","Arial";
+}
+.Footer {
+}
+.FooterChar {
+  font-size: 10px;
+}
+.TOC2 {
+  font-weight: bold;
+}
+.TOC1 {
+  font-weight: bold;
+  font-size: 9px;
+}
+.TOC3 {
+}
+.Hyperlink {
+  color: #0563C1;
+}
+.FollowedHyperlink {
+  color: #96607D;
+}
+.Strong {
+  font-weight: bold;
+}
+.licensemodelindex {
+  font-size: 7px;
+  color: #000C9E;
+ font-family: "Arial","Arial";
+}
+.PURHotBread {
+  font-size: 9px;
+  color: #E8E8E8;
+ font-family: "Arial","Arial";
+}
+.PURHashMarks {
+  font-size: 11px;
+}
+.PURFootnote {
+  font-size: 8px;
+  color: #404040;
+ font-family: "Arial","Arial";
+}
+.PURRunningHeader {
+  font-size: 10px;
+  color: #E8E8E8;
+ font-family: "Arial","Arial";
+}
+.PURSideBar {
+  font-size: 9px;
+  color: #0E2841;
+ font-family: "Arial Narrow","Arial";
+}
+.Index1 {
+  font-size: 9px;
+ font-family: "Calibri","Arial";
+}
+.CommentReference {
+  font-size: 8px;
+}
+.CommentText {
+}
+.CommentTextChar {
+  font-size: 10px;
+}
+.CommentSubject {
+  font-weight: bold;
+}
+.CommentSubjectChar {
+  font-weight: bold;
+  font-size: 10px;
+}
+.Revision {
+  font-size: 10px;
+  color: #E8E8E8;
+ font-family: "Arial","Arial";
+}
+.exceptionbody {
+  font-size: 9px;
+  color: #000000;
+ font-family: "Trebuchet MS","Arial";
+}
+.PURADDITIONALTERMSHEADERMB {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 10px;
+  color: #404040;
+ font-family: "Arial","Arial";
+}
+.productlistChar {
+  font-size: 9px;
+ font-family: "Trebuchet MS","Arial";
+}
+.PURTableTextChar {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 9px;
+ font-family: "Arial","Arial";
+}
+.PURADDITIONALTERMSHEADERMBChar {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 10px;
+  color: #404040;
+ font-family: "Arial","Arial";
+}
+.Heading1Warranty {
+  font-size: 9px;
+ font-family: "Tahoma","Arial";
+}
+.Heading2Warranty {
+  font-size: 9px;
+ font-family: "Tahoma","Arial";
+}
+.PURPCLMProductList {
+}
+.PURPCLMProductListChar {
+  font-weight: bold;
+  font-style: italic;
+  font-size: 9px;
+ font-family: "Arial","Arial";
+}
+.exceptionheader {
+  font-weight: bold;
+  font-size: 9px;
+ font-family: "Trebuchet MS","Arial";
+}
+.Emphasis {
+  font-style: italic;
+ font-family: "Trebuchet MS","Arial";
+}
+.PlainText {
+  font-size: 10px;
+ font-family: "Consolas","Arial";
+}
+.PlainTextChar {
+  font-size: 10px;
+ font-family: "Consolas","Arial";
+}
+.Heading4Char1 {
+  font-weight: bold;
+  font-style: italic;
+  color: #156082;
+ font-family: "Consolas","Arial";
+}
+.PURProductName {
+  font-size: 14px;
+}
+.PURHeading4Char {
+  font-size: 10px;
+  color: #00188F;
+ font-family: "Consolas","Arial";
+}
+.PURProductNameChar {
+  font-size: 14px;
+  color: #00188F;
+ font-family: "Consolas","Arial";
+}
+.AdditionalSoftware {
+  font-size: 9px;
+ font-family: "Trebuchet MS","Arial";
+}
+.subhead {
+  font-weight: bold;
+  color: #FFFFFF;
+ font-family: "Trebuchet MS","Arial";
+}
+.BodyText3 {
+  text-align: center;
+  font-size: 9px;
+ font-family: "Tahoma","Arial";
+}
+.BodyText3Char {
+  font-size: 9px;
+ font-family: "Tahoma","Arial";
+}
+.bullet3 {
+  font-size: 12px;
+ font-family: "Trebuchet MS","Arial";
+}
+.Body1 {
+  font-size: 9px;
+ font-family: "Tahoma","Arial";
+}
+.Body1Char1 {
+  font-size: 9px;
+ font-family: "Tahoma","Arial";
+}
+.exceptionheaderChar {
+  font-weight: bold;
+  font-size: 9px;
+ font-family: "Trebuchet MS","Arial";
+}
+.Preamble {
+  font-weight: bold;
+  font-size: 9px;
+ font-family: "Tahoma","Arial";
+}
+.CharCharCharChar {
+ font-family: "Tahoma","Arial";
+}
+.productlist {
+  font-size: 9px;
+ font-family: "Trebuchet MS","Arial";
+}
+.Heading3Bold {
+  font-weight: bold;
+  font-size: 9px;
+ font-family: "Tahoma","Arial";
+}
+.CharChar {
+  font-size: 12px;
+ font-family: "Trebuchet MS","Arial";
+}
+.TOC4 {
+  font-size: 11px;
+ font-family: "Trebuchet MS","Arial";
+}
+.TOC5 {
+  font-size: 11px;
+ font-family: "Trebuchet MS","Arial";
+}
+.TOC6 {
+  font-size: 11px;
+ font-family: "Trebuchet MS","Arial";
+}
+.TOC7 {
+  font-size: 11px;
+ font-family: "Trebuchet MS","Arial";
+}
+.TOC8 {
+  font-size: 11px;
+ font-family: "Trebuchet MS","Arial";
+}
+.TOC9 {
+  font-size: 11px;
+ font-family: "Trebuchet MS","Arial";
+}
+.Heading4nobold {
+  text-align: justify;
+  font-size: 9px;
+ font-family: "Trebuchet MS","Arial";
+}
+.BodyText {
+ font-family: "Trebuchet MS","Arial";
+}
+.BodyTextChar {
+  font-size: 10px;
+ font-family: "Trebuchet MS","Arial";
+}
+.3iNumbered2ndlevel {
+  font-size: 7px;
+  color: #000000;
+ font-family: "Tahoma","Arial";
+}
+.Heading1b {
+  font-weight: bold;
+  color: #FFFFFF;
+ font-family: "Trebuchet MS","Arial";
+}
+.LetterShorty {
+  font-size: 9px;
+ font-family: "Times New Roman","Arial";
+}
+.productlist0 {
+  font-size: 9px;
+ font-family: "Trebuchet MS","Arial";
+}
+.msoins0 {
+}
+.ClauseLevel2 {
+  text-align: justify;
+  font-size: 11px;
+ font-family: "Times New Roman","Arial";
+}
+.ClauseLevel3 {
+}
+.Title1 {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+ font-family: "Trebuchet MS","Arial";
+}
+.TOCHeading {
+  font-weight: bold;
+  font-size: 14px;
+}
+.NoSpacing {
+ font-family: "Trebuchet MS","Arial";
+}
+.NoSpacingChar {
+ font-family: "Trebuchet MS","Arial";
+}
+.VLTitleCover {
+  font-size: 34px;
+  color: #FFFFFF;
+ font-family: "Segoe UI Light","Arial";
+}
+.VLTitleCoverChar {
+  font-size: 34px;
+  color: #FFFFFF;
+ font-family: "Segoe UI Light","Arial";
+}
+.VLSubtitleCover {
+  font-size: 10px;
+  color: #112E58;
+ font-family: "Segoe UI Semibold","Arial";
+}
+.VLSubtitleCoverChar {
+  font-size: 10px;
+  color: #112E58;
+ font-family: "Segoe UI Semibold","Arial";
+}
+.appendindent {
+  font-weight: bold;
+ font-family: "Trebuchet MS","Arial";
+}
+.BodyText2 {
+ font-family: "Trebuchet MS","Arial";
+}
+.BodyText2Char {
+  font-size: 10px;
+ font-family: "Trebuchet MS","Arial";
+}
+.PURBody-Indented {
+}
+.PURBullet-Indented {
+  font-size: 9px;
+}
+.PURBodyChar {
+  font-size: 9px;
+}
+.PURBody-IndentedChar {
+  font-size: 9px;
+}
+.PURBlueStrong-Indented {
+}
+.PURBulletChar {
+  font-size: 9px;
+}
+.PURBullet-IndentedChar {
+  font-size: 9px;
+}
+.PURBlueStrongChar {
+  font-size: 9px;
+  color: #0E2841;
+ font-family: "Arial","Arial";
+}
+.PURBlueStrong-IndentedChar {
+  font-size: 9px;
+  color: #0E2841;
+ font-family: "Arial","Arial";
+}
+.PURSectionHeading {
+  font-weight: bold;
+  font-size: 20px;
+  color: #00188F;
+ font-family: "Arial","Arial";
+}
+.PURBreadcrumb {
+  text-align: right;
+  font-size: 8px;
+ font-family: "Arial Narrow","Arial";
+}
+.PURHeading3Char {
+  font-weight: bold;
+  font-size: 14px;
+  color: #00188F;
+}
+.PURSectionHeadingChar {
+  font-weight: bold;
+  font-size: 20px;
+  color: #00188F;
+ font-family: "Arial Narrow","Arial";
+}
+.PURFootnoteBullet {
+}
+.PURHotBreadChar {
+  font-size: 9px;
+  color: #E8E8E8;
+ font-family: "Arial","Arial";
+}
+.PURBreadcrumbChar {
+  font-size: 8px;
+  color: #E8E8E8;
+ font-family: "Arial Narrow","Arial";
+}
+.PURLMSH {
+ font-family: "Arial Narrow","Arial";
+}
+.PURFootnoteChar {
+  font-size: 8px;
+  color: #404040;
+ font-family: "Arial","Arial";
+}
+.PURFootnoteBulletChar {
+  font-size: 8px;
+  color: #404040;
+ font-family: "Arial","Arial";
+}
+.PURTOCHeader {
+}
+.PURTOCHeaderChar {
+  font-weight: bold;
+  font-size: 20px;
+  color: #00188F;
+ font-family: "Arial","Arial";
+}
+.PURAddtlSoftwareProductName {
+  font-weight: bold;
+  font-size: 10px;
+}
+.ProductAttributesTable {
+  font-size: 9px;
+  color: #404040;
+ font-family: "Arial Narrow","Arial";
+}
+.PURTable {
+  font-size: 9px;
+ font-family: "Arial","Arial";
+}
+.PURFooterTable {
+  font-size: 8px;
+  color: #E8E8E8;
+ font-family: "Arial","Arial";
+}
+.PURFooterText {
+  font-weight: bold;
+  font-size: 6px;
+  color: #404040;
+ font-family: "Calibri","Arial";
+}
+.PURHeaderText {
+  font-weight: bold;
+  font-size: 7px;
+  color: #404040;
+ font-family: "Calibri","Arial";
+}
+.PURBlueBGHeader {
+  font-weight: bold;
+}
+.PURTableNoBorder {
+  font-size: 10px;
+  color: #E8E8E8;
+ font-family: "Arial","Arial";
+}
+.PURTOCHeader1 {
+  font-size: 16px;
+  color: #0E2841;
+ font-family: "Arial Black","Arial";
+}
+.PURTOCHeader1Char {
+  font-size: 16px;
+  color: #0E2841;
+ font-family: "Arial Black","Arial";
+}
+.PURTitlePage {
+  font-size: 36px;
+  color: #0E2841;
+}
+.PURTableNoVertical {
+}
+.PURBodyBold {
+  font-weight: bold;
+}
+.PURHeading5 {
+  font-weight: bold;
+  font-size: 9px;
+ font-family: "Arial Black","Arial";
+}
+.PURHeading6 {
+  color: #0072C6;
+}
+.PURHeading7 {
+  color: #4668C5;
+}
+.Index2 {
+}
+.UnresolvedMention {
+  color: #808080;
+}
