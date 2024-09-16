@@ -1,4 +1,4 @@
-﻿using DocumentFormat.OpenXml;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -19,6 +19,7 @@ using Table = DocumentFormat.OpenXml.Wordprocessing.Table;
 using TableCell = DocumentFormat.OpenXml.Wordprocessing.TableCell;
 using TableRow = DocumentFormat.OpenXml.Wordprocessing.TableRow;
 using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
+using System.Xml.Linq;
 
 namespace DocumentSplitter
 {
@@ -26,8 +27,10 @@ namespace DocumentSplitter
     {
         // Extract Bullet Points
         public static string fileNameIn = string.Empty;
+        public static string fileFolder = string.Empty;
         public static string filePathIn = string.Empty;
         public static string filePathOut = string.Empty;
+        public static int imageCount = 0;
 
         public static List<Paragraph> tocParagraphs = new List<Paragraph>();
         public static List<string> tocStyles = new List<string>();
@@ -43,8 +46,9 @@ namespace DocumentSplitter
 
                 if (File.Exists(fileNameIn))
                 {                 
-                    filePathIn = Path.GetDirectoryName(fileNameIn);                    
-                    filePathOut = $"{filePathIn}\\output";
+                    filePathIn = Path.GetDirectoryName(fileNameIn);
+                    fileFolder = Path.GetFileNameWithoutExtension(fileNameIn);
+                    filePathOut = $"{filePathIn}\\{fileFolder}";
 
                     Directory.CreateDirectory(filePathOut);
                 }
@@ -61,7 +65,7 @@ namespace DocumentSplitter
         public static void ExtractContents(string fileNameIn)
         {
             string filePath = fileNameIn;
-            string paragraphOutputFile = $"{filePathOut}\\{Path.GetFileNameWithoutExtension(fileNameIn)}.html"; // File to save paragraph text
+            string paragraphOutputFile = $"{filePathOut}\\{fileFolder}.html"; // File to save paragraph text
 
             // Ensure the directory exists for saving output files
             Directory.CreateDirectory($"{filePathOut}\\paragraphs");
@@ -72,8 +76,7 @@ namespace DocumentSplitter
             using (WordprocessingDocument wordDoc = WordprocessingDocument.Open(filePath, false))
             {
                 Body body = wordDoc.MainDocumentPart.Document.Body;
-
-                int imageCount = 0;
+                
                 int currentLevel = 0;
                 Stack<int> listStack = new Stack<int>();
 
@@ -166,7 +169,7 @@ namespace DocumentSplitter
                 // Close TOC column
                 htmlWriter.WriteLine("</div>"); 
 
-                // Start content column
+                // Start content colum
                 htmlWriter.WriteLine("<div class=\"content-column\" style=\"position: absolute; left: 25%; top: 0; bottom: 0; right: 0; overflow: auto;\";  >");
 
                 //#####################################################################################################################
@@ -211,6 +214,67 @@ namespace DocumentSplitter
 
                 }
 
+
+                // Loop through all Elements of Document and Group by Bookmark Name
+                foreach (var element in body.Elements())
+                {
+                    if (element is Paragraph paragraph)
+                    {
+                        // Find the first BookmarkStart element within the paragraph
+                        BookmarkStart bookmarkStart = paragraph.Descendants<BookmarkStart>().LastOrDefault();
+
+                        if (bookmarkStart != null)
+                        {
+                            if (bookmarkStart.Name == bookmarks[bookmarkPos].ToString())
+                            {
+                                if (bookmarkSelect != null)
+                                {
+                                    var bookmarkInfo = new BookmarkInfo() { BookmarkName = bookmarkStart.Name, Elements = sectionElements };
+                                    bookmarkElements.Add(bookmarkInfo);
+                                }
+
+                                bookmarkSelect = bookmarkStart.Name;
+                                bookmarkPos++;
+                                sectionElements = new List<OpenXmlElement>();
+                            }
+
+                        }
+                    }
+
+                    if (bookmarkSelect != null)
+                    {
+                        sectionElements.Add(element);
+                    }
+
+                }
+
+                if (bookmarkElements.Count == 0)
+                {
+                    bookmarkSelect = String.Empty;
+                    sectionElements = new List<OpenXmlElement>();
+
+                    foreach (var element in body.Elements())
+                    {
+                        foreach (var celement in element.ChildElements)
+                        { 
+                            if (celement is Hyperlink hyperlink)
+                            {
+                                var bookmarkInfo = new BookmarkInfo() { BookmarkName = hyperlink.Id, Elements = sectionElements };
+                                bookmarkElements.Add(bookmarkInfo);
+                                sectionElements = new List<OpenXmlElement>();
+                                break;
+                            }
+                        }
+
+                        if (bookmarkSelect != null)
+                        {
+                            sectionElements.Add(element);
+                        }
+                    }
+                    
+                }
+
+
                 //Loop through all bookmarked sections
                 foreach (var bookmarkElement in bookmarkElements)
                 {
@@ -232,7 +296,7 @@ namespace DocumentSplitter
                         if (element is Paragraph paragraph)
                         {
                             var pStyle = GetParagraphStyle(paragraph);
-                            if (!pStyle.StartsWith("TOC", StringComparison.OrdinalIgnoreCase))
+                            if (!pStyle.StartsWith("TOC", StringComparison.OrdinalIgnoreCase) | !pStyle.StartsWith("SEC", StringComparison.OrdinalIgnoreCase))
                             {
                                 // Write paragraph HTML to the bookmark content
                                 var texts = paragraph.Descendants<Text>().Select(t => t.Text).ToList();
@@ -244,8 +308,8 @@ namespace DocumentSplitter
                             var drawingElements = paragraph.Descendants<Drawing>();
                             foreach (var drawing in drawingElements)
                             {
-                                imageCount++;
-                                string imageFileName = ExtractImageFromDrawing(drawing, wordDoc, imageCount);
+
+                                string imageFileName = ExtractImageFromDrawing(drawing, wordDoc);
                                 if (!string.IsNullOrEmpty(imageFileName))
                                 {
                                     string imgTag = $"<img src=\"../images/{imageFileName}\" alt=\"Image\" />";
@@ -257,7 +321,7 @@ namespace DocumentSplitter
                         // Convert table to HTML
                         if (element is Table table)
                         {
-                            string tableHtml = ConvertTableToHtml(table);
+                            string tableHtml = ConvertTableToHtml(table, wordDoc);
                             bookmarkContentBuilder.AppendLine(tableHtml);
                         }
 
@@ -268,8 +332,7 @@ namespace DocumentSplitter
                             imageCount = 0;
                             foreach (var drawing in drawingElements)
                             {
-                                imageCount++;
-                                string imageFileName = ExtractImageFromDrawing(drawing, wordDoc, imageCount);
+                                string imageFileName = ExtractImageFromDrawing(drawing, wordDoc);
                                 if (!string.IsNullOrEmpty(imageFileName))
                                 {
                                     string imageHtml = $"<img src=\"images/{imageFileName}\" alt=\"Image\" />";
@@ -365,7 +428,7 @@ namespace DocumentSplitter
         }
 
         // Extract images from drawing
-        public static string ExtractImageFromDrawing(Drawing drawing, WordprocessingDocument wordDoc, int imageCount)
+        public static string ExtractImageFromDrawing(Drawing drawing, WordprocessingDocument wordDoc)
         {
             var blip = drawing.Descendants<Blip>().FirstOrDefault();
             if (blip != null)
@@ -375,8 +438,10 @@ namespace DocumentSplitter
 
                 if (imagePart != null)
                 {
+                    imageCount ++;
+
                     string imageFileName = $"image_{imageCount}.png"; // Image name in output folder
-                    string imageFilePath = Path.Combine($"{filePathIn}\\output\\images", imageFileName);
+                    string imageFilePath = Path.Combine($"{filePathIn}\\{fileFolder}\\images", imageFileName);
 
                     using (var stream = imagePart.GetStream())
                     {
@@ -394,7 +459,7 @@ namespace DocumentSplitter
         }
 
         // Convert table to HTML and add bookmark IDs to <td> tags if available
-        public static string ConvertTableToHtml(Table table)
+        public static string ConvertTableToHtml(Table table, WordprocessingDocument wordDoc)
         {
             string html = "<table border='1' style='border-collapse: collapse;'>\n";
 
@@ -404,12 +469,13 @@ namespace DocumentSplitter
 
                 foreach (var cell in row.Elements<TableCell>())
                 {
+                    
+
                     // Extract the pStyle from the cell's first paragraph, if available
                     var firstParagraph = cell.Descendants<Paragraph>().FirstOrDefault();
                     string cellStyle = firstParagraph != null ? GetParagraphStyle(firstParagraph) : "normal";
 
                     // Check if a bookmark exists within this cell and use it as the id
-
                     string cellText = cell.InnerText.Replace("\\s", "").Replace("\\t", "").Replace("\"", "").Replace("AutoTextList", "").Replace("NoStyle", "");
 
                     // Generate CSS for the cell from the paragraph (if any)
@@ -425,7 +491,38 @@ namespace DocumentSplitter
                     var bookMark = GetBookmarkName(cell.Descendants<Paragraph>().FirstOrDefault());
                     string idAttribute = bookMark != null ? $" id=\"{bookMark}\"" : string.Empty;
 
-                    html += $"<td {idAttribute} class=\"{cellStyle}\"{idAttribute} style=\"{inlineStyle}\">{cellText}</td>\n";
+                    html += $"<td {idAttribute} class=\"{cellStyle}\"{idAttribute} style=\"{inlineStyle}\">";
+
+                    foreach (var element in cell.Elements())
+                    {
+                        if (element is Paragraph paragraph)
+                        {
+                            var pStyle = GetParagraphStyle(paragraph);
+                            if (!pStyle.StartsWith("TOC", StringComparison.OrdinalIgnoreCase) | !pStyle.StartsWith("SEC", StringComparison.OrdinalIgnoreCase))
+                            {
+                                // Write paragraph HTML to the bookmark content
+                                var texts = paragraph.Descendants<Text>().Select(t => t.Text).ToList();
+                                string paragraphText = string.Join(" ", texts);
+                                var paragraphHtml = $"<p class=\"{pStyle}\">{paragraphText}</p>";
+                                html += paragraphHtml;
+                            }
+                            
+                            foreach (var drawing in paragraph.Descendants<Drawing>())
+                            {
+                                var imageFileName = ExtractImageFromDrawing(drawing, wordDoc);
+                                if (!string.IsNullOrEmpty(imageFileName))
+                                {
+                                    string imgTag = $"<img src=\"../images/{imageFileName}\" alt=\"Image\" />";
+                                    html += imgTag;
+                                }
+                            }
+                        }                        
+                    }
+                   
+                    
+
+                   
+                    html += $"</td>\n";
                 }
 
                 html += "</tr>\n";
@@ -473,6 +570,7 @@ namespace DocumentSplitter
             var alignment = paragraph.ParagraphProperties?.Justification?.Val.ToString().ToLower();
             if (alignment != null)
             {
+
 
                 string textAlign = alignment switch
                 {
@@ -773,7 +871,3 @@ namespace DocumentSplitter
             File.WriteAllText($"{filePathOut}\\style.css", cssBuilder.ToString());
         }
     }
-}
-
-
-
