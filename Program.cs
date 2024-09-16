@@ -20,6 +20,7 @@ using TableCell = DocumentFormat.OpenXml.Wordprocessing.TableCell;
 using TableRow = DocumentFormat.OpenXml.Wordprocessing.TableRow;
 using Text = DocumentFormat.OpenXml.Wordprocessing.Text;
 using System.Xml.Linq;
+using static DocumentSplitter.Program;
 
 namespace DocumentSplitter
 {
@@ -175,8 +176,9 @@ namespace DocumentSplitter
                 //#####################################################################################################################
                 //Export BookMark Sections as HTML pages
                 var bookmarks = GetBookmarks(body);
-                var bookmarkSelect = String.Empty;
+                var bookmarkSelect = "_start";
                 var bookmarkPos = 0;
+                var bookmarkInfo = new BookmarkInfo();
                 List<BookmarkInfo> bookmarkElements = new List<BookmarkInfo>();
                 List<OpenXmlElement> sectionElements = new List<OpenXmlElement>();
                 
@@ -189,15 +191,11 @@ namespace DocumentSplitter
                         BookmarkStart bookmarkStart = paragraph.Descendants<BookmarkStart>().LastOrDefault();
 
                         if (bookmarkStart != null)                            
-                        {
-                            if (bookmarkStart.Name == bookmarks[bookmarkPos].ToString())
-                            {
-                                if (bookmarkSelect != null)
-                                {                                    
-                                    var bookmarkInfo = new BookmarkInfo() { BookmarkName = bookmarkStart.Name, Elements = sectionElements };
-                                    bookmarkElements.Add(bookmarkInfo);
-                                }
-
+                        {                            
+                            if (bookmarkStart.Name.ToString().StartsWith("_T") && bookmarkStart.Name == bookmarks[bookmarkPos].ToString())
+                            {                                 
+                                bookmarkInfo = new BookmarkInfo() { BookmarkName = bookmarkSelect, Elements = sectionElements };
+                                bookmarkElements.Add(bookmarkInfo);                              
                                 bookmarkSelect = bookmarkStart.Name;
                                 bookmarkPos++;
                                 sectionElements = new List<OpenXmlElement>();
@@ -205,47 +203,11 @@ namespace DocumentSplitter
                                 
                         }    
                     }
-
-                    if(bookmarkSelect != null)
-                    {
-                        sectionElements.Add(element);
-                    }
-
+                    sectionElements.Add(element);
                 }
 
-
-                // Loop through all Elements of Document and Group by Bookmark Name
-                foreach (var element in body.Elements())
-                {
-                    if (element is Paragraph paragraph)
-                    {
-                        // Find the first BookmarkStart element within the paragraph
-                        BookmarkStart bookmarkStart = paragraph.Descendants<BookmarkStart>().LastOrDefault();
-
-                        if (bookmarkStart != null)
-                        {
-                            if (bookmarkStart.Name == bookmarks[bookmarkPos].ToString())
-                            {
-                                if (bookmarkSelect != null)
-                                {
-                                    var bookmarkInfo = new BookmarkInfo() { BookmarkName = bookmarkStart.Name, Elements = sectionElements };
-                                    bookmarkElements.Add(bookmarkInfo);
-                                }
-
-                                bookmarkSelect = bookmarkStart.Name;
-                                bookmarkPos++;
-                                sectionElements = new List<OpenXmlElement>();
-                            }
-
-                        }
-                    }
-
-                    if (bookmarkSelect != null)
-                    {
-                        sectionElements.Add(element);
-                    }
-
-                }
+                bookmarkInfo = new BookmarkInfo() { BookmarkName = bookmarkSelect, Elements = sectionElements };
+                bookmarkElements.Add(bookmarkInfo);
 
                 if (bookmarkElements.Count == 0)
                 {
@@ -258,7 +220,7 @@ namespace DocumentSplitter
                         { 
                             if (celement is Hyperlink hyperlink)
                             {
-                                var bookmarkInfo = new BookmarkInfo() { BookmarkName = hyperlink.Id, Elements = sectionElements };
+                                bookmarkInfo = new BookmarkInfo() { BookmarkName = hyperlink.Id, Elements = sectionElements };
                                 bookmarkElements.Add(bookmarkInfo);
                                 sectionElements = new List<OpenXmlElement>();
                                 break;
@@ -295,7 +257,7 @@ namespace DocumentSplitter
                         if (element is Paragraph paragraph)
                         {
                             var pStyle = GetParagraphStyle(paragraph);
-                            if (!pStyle.StartsWith("TOC", StringComparison.OrdinalIgnoreCase) | !pStyle.StartsWith("SEC", StringComparison.OrdinalIgnoreCase))
+                            if (!pStyle.StartsWith("TOC", StringComparison.OrdinalIgnoreCase) )
                             {
                                 // Write paragraph HTML to the bookmark content
                                 var texts = paragraph.Descendants<Text>().Select(t => t.Text).ToList();
@@ -542,11 +504,20 @@ namespace DocumentSplitter
             // Initialize a style string
             string inlineStyle = "";
 
-            // Check for font colur
-            if (paragraph.Descendants<RunProperties>().Any(rp => rp.Color != null && rp.Color.Val != null))
+
+            // Check for font color
+            try
             {
-                var fontColor = paragraph.Descendants<RunProperties>().Select(rp => rp.Color.Val)?.FirstOrDefault();
-                inlineStyle += $" color: {fontColor}; ";
+                paragraph.Descendants<RunProperties>().Any(rp => rp.Color != null && rp.Color.Val != null);
+                if (paragraph.Descendants<RunProperties>().Any(rp => rp.Color != null && rp.Color.Val != null))
+                {
+                    var fontColor = paragraph.Descendants<RunProperties>().Select(rp => rp.Color.Val)?.FirstOrDefault();
+                    inlineStyle += $" color: {fontColor}; ";
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());   
             }
 
             // Check for bold text
