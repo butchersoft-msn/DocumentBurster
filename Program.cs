@@ -100,7 +100,7 @@ namespace DocumentSplitter
                 htmlWriter.WriteLine($"<meta name=\"modified\" content=\"{properties.Modified}\">");
                 htmlWriter.WriteLine($"<meta name=\"source\" content=\"{fileNameIn}\">");
                 htmlWriter.WriteLine("</head>");
-                htmlWriter.WriteLine("<body style=\"font-family: sans-serif;font-size:11px\">");
+                htmlWriter.WriteLine("<body class=\"normal\" style=\"font-family: sans-serif; font-size:11px\">");
 
                 // Add container for two-column layout
                 htmlWriter.WriteLine("<div class=\"container\">");
@@ -179,7 +179,6 @@ namespace DocumentSplitter
                 var bookmarkPos = 0;
                 List<BookmarkInfo> bookmarkElements = new List<BookmarkInfo>();
                 List<OpenXmlElement> sectionElements = new List<OpenXmlElement>();
-
                 
                 //Loop through all Elements of Document and Group by Bookmark Name
                 foreach (var element in body.Elements())
@@ -285,9 +284,9 @@ namespace DocumentSplitter
                     bookmarkContentBuilder.AppendLine("<html>");
                     bookmarkContentBuilder.AppendLine("<head>");
                     bookmarkContentBuilder.AppendLine("<link href=\"https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Merriweather:wght@400;700&display=swap\" rel=\"stylesheet\">");
-                    bookmarkContentBuilder.AppendLine($"<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\">"); // Link to external CSS
+                    bookmarkContentBuilder.AppendLine($"<link rel=\"stylesheet\" type=\"text/css\" href=\"../style.css\">"); // Link to external CSS
                     bookmarkContentBuilder.AppendLine("</head>");
-                    bookmarkContentBuilder.AppendLine("<body>");
+                    bookmarkContentBuilder.AppendLine("<body class=\"normal\">");
 
                     //WRITE BOOKMARKS TO PAGES
                     foreach (var element in bookmarkElement.Elements)
@@ -301,7 +300,7 @@ namespace DocumentSplitter
                                 // Write paragraph HTML to the bookmark content
                                 var texts = paragraph.Descendants<Text>().Select(t => t.Text).ToList();
                                 string paragraphText = string.Join(" ", texts);
-                                var paragraphHtml = $"<p class=\"{pStyle}\">{paragraphText}</p>";
+                                var paragraphHtml = $"<div class=\"{pStyle}\">{paragraphText}<div>";
                                 bookmarkContentBuilder.AppendLine(paragraphHtml);
                             }
 
@@ -390,10 +389,13 @@ namespace DocumentSplitter
         /// Extract the style from Paragraph properties
         public static string GetParagraphStyle(Paragraph paragraph)
         {
-            var paragraphProperties = paragraph.ParagraphProperties;
-            if (paragraphProperties != null && paragraphProperties.ParagraphStyleId != null)
+            if (paragraph != null)
             {
-                return paragraphProperties.ParagraphStyleId.Val;
+                var paragraphProperties = paragraph.ParagraphProperties;
+                if (paragraphProperties != null && paragraphProperties.ParagraphStyleId != null)
+                {
+                    return paragraphProperties.ParagraphStyleId.Val;
+                }
             }
             return "normal"; // Default to "normal" if no style is found
         }
@@ -467,25 +469,27 @@ namespace DocumentSplitter
             {
                 html += "<tr>\n";
 
+                var oldCellStyle = "";
                 foreach (var cell in row.Elements<TableCell>())
                 {
                     
-
                     // Extract the pStyle from the cell's first paragraph, if available
                     var firstParagraph = cell.Descendants<Paragraph>().FirstOrDefault();
                     string cellStyle = firstParagraph != null ? GetParagraphStyle(firstParagraph) : "normal";
 
-                    // Check if a bookmark exists within this cell and use it as the id
-                    string cellText = cell.InnerText.Replace("\\s", "").Replace("\\t", "").Replace("\"", "").Replace("AutoTextList", "").Replace("NoStyle", "");
-
-                    // Generate CSS for the cell from the paragraph (if any)
-                    string inlineStyle = GetCellInlineStyle(firstParagraph);
-
-                    // Extract cell background color
-                    string backgroundColor = GetCellBackgroundColor(cell);
-                    if (!string.IsNullOrEmpty(backgroundColor))
+                    string inlineStyle = "";
+                    if (cellStyle != oldCellStyle)
                     {
-                        inlineStyle += $"background-color: {backgroundColor}; ";
+                        // Generate CSS for the cell from the paragraph (if any)
+                        inlineStyle = GetCellInlineStyle(firstParagraph);
+
+                        // Extract cell background color
+                        string backgroundColor = GetCellBackgroundColor(cell);
+                        if (!string.IsNullOrEmpty(backgroundColor))
+                        {
+                            inlineStyle += $"background-color: {backgroundColor}; ";
+                        }
+                        oldCellStyle = cellStyle;
                     }
 
                     var bookMark = GetBookmarkName(cell.Descendants<Paragraph>().FirstOrDefault());
@@ -495,19 +499,20 @@ namespace DocumentSplitter
 
                     foreach (var element in cell.Elements())
                     {
-                        if (element is Paragraph paragraph)
-                        {
-                            var pStyle = GetParagraphStyle(paragraph);
+                        
+                        
+                            var texts = element.Descendants<Text>().Select(t => t.Text).ToList();
+                            var pStyle = GetParagraphStyle(element as Paragraph);
                             if (!pStyle.StartsWith("TOC", StringComparison.OrdinalIgnoreCase) | !pStyle.StartsWith("SEC", StringComparison.OrdinalIgnoreCase))
                             {
                                 // Write paragraph HTML to the bookmark content
-                                var texts = paragraph.Descendants<Text>().Select(t => t.Text).ToList();
-                                string paragraphText = string.Join(" ", texts);
-                                var paragraphHtml = $"<p class=\"{pStyle}\">{paragraphText}</p>";
+                                
+                                string paragraphText = string.Join(" ", texts).Replace("\\s", "").Replace("\\t", "").Replace("\"", "").Replace("AutoTextList", "").Replace("NoStyle", ""); ;
+                                var paragraphHtml = $"<div class=\"{pStyle}\">{paragraphText}</div>";
                                 html += paragraphHtml;
                             }
                             
-                            foreach (var drawing in paragraph.Descendants<Drawing>())
+                            foreach (var drawing in element.Descendants<Drawing>())
                             {
                                 var imageFileName = ExtractImageFromDrawing(drawing, wordDoc);
                                 if (!string.IsNullOrEmpty(imageFileName))
@@ -516,12 +521,9 @@ namespace DocumentSplitter
                                     html += imgTag;
                                 }
                             }
-                        }                        
+                                                
                     }
-                   
-                    
-
-                   
+                                                          
                     html += $"</td>\n";
                 }
 
@@ -563,7 +565,7 @@ namespace DocumentSplitter
             var fontSize = paragraph.Descendants<RunProperties>().Select(rp => rp.FontSize?.Val).FirstOrDefault();
             if (fontSize != null)
             {
-                inlineStyle += $"font-size: {fontSize}pt; ";
+                inlineStyle += $"font-size: {Convert.ToInt32(fontSize)/2}pt; ";
             }
 
             // Handle text alignment
@@ -871,3 +873,7 @@ namespace DocumentSplitter
             File.WriteAllText($"{filePathOut}\\style.css", cssBuilder.ToString());
         }
     }
+}
+
+
+
