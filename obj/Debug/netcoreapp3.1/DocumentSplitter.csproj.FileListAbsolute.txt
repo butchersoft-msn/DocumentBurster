@@ -1,0 +1,39 @@
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.exe
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.deps.json
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.runtimeconfig.json
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.runtimeconfig.dev.json
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.dll
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.pdb
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\OpenXmlPowerTools.dll
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\OpenXmlPowerTools.pdb
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.csproj.AssemblyReference.cache
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.AssemblyInfoInputs.cache
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.AssemblyInfo.cs
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.csproj.CoreCompileInputs.cache
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.csproj.CopyComplete
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.dll
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.pdb
+C:\Users\antho\Source\Repos\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.genruntimeconfig.cache
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.csproj.AssemblyReference.cache
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.GeneratedMSBuildEditorConfig.editorconfig
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.AssemblyInfoInputs.cache
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.AssemblyInfo.cs
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.csproj.CoreCompileInputs.cache
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.sourcelink.json
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.dll
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.pdb
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.exe
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.deps.json
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.runtimeconfig.json
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.runtimeconfig.dev.json
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.dll
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentSplitter.pdb
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.dll
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\DocumentFormat.OpenXml.Framework.dll
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\OpenXmlPowerTools.dll
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\System.IO.Packaging.dll
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\bin\Debug\netcoreapp3.1\System.Management.Automation.dll
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\Document.6DEEBC3E.Up2Date
+C:\Repos\Swoosh\Swoosh Apps\eBurster2\DocumentSplitter\obj\Debug\netcoreapp3.1\DocumentSplitter.genruntimeconfig.cache

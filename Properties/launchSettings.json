@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "DocumentSplitter": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\TESTDATA\\DocumentSplitter\\MicrosoftProductTerms.docx"
+    }
+  }
+}
